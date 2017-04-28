@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build docs help test tests
 .DEFAULT_GOAL := help
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -22,6 +22,12 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
+SHELL = /bin/zsh
+NPROCS:=$(shell /usr/bin/nproc) 
+
+.git/hooks/pre-commit:
+	flake8 --install-hook git
+	git config flake8.strict true
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
@@ -50,21 +56,24 @@ clean-test: ## remove test and coverage artifacts
 lint: ## check style with flake8
 	flake8 npcseed tests
 
-test: ## run tests quickly with the default Python
+test: .git/hooks/pre-commit ## run tests with the default Python
 	py.test
 	
+tests: .git/hooks/pre-commit ## run tests in parallel with the default Python
+	py.test -n auto
+	
 
-test-all: ## run tests on every Python version with tox
+test-all: .git/hooks/pre-commit ## run tests on every Python version with tox
 	tox
 
-coverage: ## check code coverage quickly with the default Python
+coverage: .git/hooks/pre-commit ## check code coverage quickly with the default Python
 	coverage run --source npcseed -m pytest
 	
 		coverage report -m
 		coverage html
 		$(BROWSER) htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
+docs: .git/hooks/pre-commit ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/npcseed.rst
 	rm -f docs/modules.rst
 	sphinx-apidoc -o docs/ npcseed
