@@ -5,3 +5,9 @@ pytest-xdist
 pytest-coverage
 pytest-colordots
 pytest-html
+bumpversion
+flake8
+tox
+coverage
+Sphinx
+PyYAML
