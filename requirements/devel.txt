@@ -11,3 +11,4 @@ tox
 coverage
 Sphinx
 PyYAML
+yapf
