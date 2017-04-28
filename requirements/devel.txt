@@ -1,0 +1,7 @@
+click
+pyflakes
+pytest
+pytest-xdist
+pytest-coverage
+pytest-colordots
+pytest-html
