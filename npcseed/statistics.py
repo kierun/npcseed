@@ -18,7 +18,7 @@ def weighted_choice(choices):
     >>> weighted_choice(values)
     'three'
 
-    Taken from this `answer`_ by Ned Batchelder
+    Taken from this `answer`_ by Ned Batchelder.
 
     .. _answer: http://stackoverflow.com/a/3679747/232794
 
@@ -28,7 +28,7 @@ def weighted_choice(choices):
     total = sum(w for c, w in choices)
     r = uniform(0, total)
     upto = 0
-    for c, w in choices:
+    for c, w in choices:  # pragma: no branch
         if upto + w >= r:
             return c
         upto += w
