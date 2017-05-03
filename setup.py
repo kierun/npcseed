@@ -29,6 +29,7 @@ setup(
     packages=[
         'npcseed',
     ],
+    package_data={'/usr/share/npcseed/data': ['*.yaml', ], },
     package_dir={'npcseed':
                  'npcseed'},
     entry_points={

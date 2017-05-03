@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """
 test_npcseed
 ----------------------------------
@@ -10,10 +9,10 @@ Tests for `npcseed` module.
 
 import pytest
 
-from contextlib import contextmanager
+from contextlib import contextmanager  # noqa
 from click.testing import CliRunner
 
-from npcseed import npcseed
+# from npcseed import npcseed
 from npcseed import cli
 
 
@@ -31,6 +30,8 @@ def test_content(response):
     """
     # from bs4 import BeautifulSoup
     # assert 'GitHub' in BeautifulSoup(response.content).title.string
+
+
 def test_command_line_interface():
     runner = CliRunner()
     result = runner.invoke(cli.main)
